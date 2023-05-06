@@ -1,6 +1,6 @@
 <?php
-//DISABILITO EDITOR VISUALE ACF
-add_filter('acf/settings/show_admin', 'trp_is_super_admin');
+//TODO DISABILITO EDITOR VISUALE ACF
+//add_filter('acf/settings/show_admin', 'false');
 
 //PAGE OPTION
 $dati_tema = wp_get_theme();
@@ -13,19 +13,6 @@ acf_add_options_sub_page(array(
     'update_button'     => __('Aggiorna', 'blank'),
     'updated_message'   => __("Opzioni aggiornate", 'blank'),
 ));
-
-//ADMIN PAGE OPTION ONLY FOR SPECIFIC USER
-if( trp_is_super_admin() ):
-
-    acf_add_options_sub_page(array(
-        'page_title' 	    => 'Opzioni Trapstudio',
-        'menu_slug' 	    => 'trap-options',
-        'parent_slug'       => 'themes.php',
-        'update_button'     => __('Aggiorna', 'blank'),
-        'updated_message'   => __("Opzioni aggiornate", 'blank'),
-    ));	
-
-endif;
 
 
 // GUTENBERG CATEGORIES REGISTRATION
@@ -55,12 +42,6 @@ function trp_register_acf_blocks() {
     //register_block_type( THEME_DIR . '/partials/blocks/custom-block' );
 }
 add_action( 'init', 'trp_register_acf_blocks' );
-
-
-//REMOVE ADMIN BAR FOR ADMINISTRATOR IF OPTION FIELD IS CHECKED
-if(!is_admin() && current_user_can('administrator') && get_field('admin_bar', 'option')){
-    add_filter('show_admin_bar', '__return_false');
-}
 
 
 // API KEY

@@ -1,8 +1,4 @@
 <?php 
-function trp_is_super_admin() {
-    return current_user_can('trap_admin');
-}
-
 //SANITIZE PHONE
 function trp_phone($tel) {
     $tel = str_replace('+', '00', $tel);

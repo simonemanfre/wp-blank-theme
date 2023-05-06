@@ -30,12 +30,6 @@ add_filter( 'allowed_block_types_all', 'trp_allowed_block_types' );
 */
 
 
-//REMOVE ADMIN BAR FOR USER
-if(!current_user_can('edit_posts')){
-    add_filter('show_admin_bar', '__return_false');
-}
-
-
 //DISABLE EDITOR FULLSCREEN BY DEFAULT
 function ghub_disable_editor_fullscreen_mode() {
 	$script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
