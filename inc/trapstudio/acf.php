@@ -10,8 +10,8 @@ acf_add_options_sub_page(array(
     'page_title' 	    => $title_option_page,
     'menu_slug' 	    => 'theme-options',
     'parent_slug'       => 'themes.php',
-    'update_button'     => __('Aggiorna', 'dna'),
-    'updated_message'   => __("Opzioni aggiornate", 'dna'),
+    'update_button'     => __('Aggiorna', 'blank'),
+    'updated_message'   => __("Opzioni aggiornate", 'blank'),
 ));
 
 //ADMIN PAGE OPTION ONLY FOR SPECIFIC USER
@@ -21,8 +21,8 @@ if( trp_is_super_admin() ):
         'page_title' 	    => 'Opzioni Trapstudio',
         'menu_slug' 	    => 'trap-options',
         'parent_slug'       => 'themes.php',
-        'update_button'     => __('Aggiorna', 'dna'),
-        'updated_message'   => __("Opzioni aggiornate", 'dna'),
+        'update_button'     => __('Aggiorna', 'blank'),
+        'updated_message'   => __("Opzioni aggiornate", 'blank'),
     ));	
 
 endif;

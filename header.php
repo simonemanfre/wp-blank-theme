@@ -33,7 +33,7 @@ get_header(null, $args);
 
     <?php get_template_part('partials/svg', 'icons'); ?>
 
-    <a class="c-skip-to-content" href="#main-content"><?php _e('Skip to content', 'dna') ?></a>
+    <a class="c-skip-to-content" href="#main-content"><?php _e('Skip to content', 'blank') ?></a>
 
     <header id="header-content" class="c-site-header">
         <div class="c-site-header__content l-container">

@@ -1,5 +1,5 @@
 {
-  "name": "DNA",
+  "name": "WP Blank Theme",
   "version": "1.0.0",
   "scripts": {
     "sass": "sass -w assets/scss:assets/css",
