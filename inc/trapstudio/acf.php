@@ -10,8 +10,8 @@ acf_add_options_sub_page(array(
     'page_title' 	    => $title_option_page,
     'menu_slug' 	    => 'theme-options',
     'parent_slug'       => 'themes.php',
-    'update_button'     => __('Aggiorna', 'blank'),
-    'updated_message'   => __("Opzioni aggiornate", 'blank'),
+    'update_button'     => __('Aggiorna', 'wp-blank-theme'),
+    'updated_message'   => __("Opzioni aggiornate", 'wp-blank-theme'),
 ));
 
 

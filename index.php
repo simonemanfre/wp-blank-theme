@@ -68,7 +68,7 @@ wp_reset_query();
     if($next_link):
     ?>
         <footer class="c-loader u-align-center">
-            <button class="c-button c-button--loader j-next-button" type="button" href="<?php echo $next_link ?>"><?php _e('Guarda di più', 'blank') ?> <span class="c-button__loader"><svg class="c-spinner infinite-scroll-request" width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></span></button>
+            <button class="c-button c-button--loader j-next-button" type="button" href="<?php echo $next_link ?>"><?php _e('Guarda di più', 'wp-blank-theme') ?> <span class="c-button__loader"><svg class="c-spinner infinite-scroll-request" width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg"><circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></span></button>
         </footer>
     <?php endif; ?>
 

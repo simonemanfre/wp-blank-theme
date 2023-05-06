@@ -38,12 +38,12 @@ endif;
 //MENU
 add_theme_support( 'nav-menus' );
 if ( function_exists( 'register_nav_menus' ) ) {
-	register_nav_menus( array('Primario' => __( 'Navigazione primaria', 'blank') ) );
-    // register_nav_menus( array('Top' => __( 'Navigazione Top Bar', 'blank') ) );
-	// register_nav_menus( array('Megamenu1' => __( 'Navigazione Megamenù 1', 'blank') ) );
-	// register_nav_menus( array('Megamenu2' => __( 'Navigazione Megamenù 2', 'blank') ) );
-	// register_nav_menus( array('Footer1' => __( 'Navigazione Footer 1', 'blank') ) );
-	// register_nav_menus( array('Footer2' => __( 'Navigazione Footer 2', 'blank') ) );
+	register_nav_menus( array('Primario' => __( 'Navigazione primaria', 'wp-blank-theme') ) );
+    // register_nav_menus( array('Top' => __( 'Navigazione Top Bar', 'wp-blank-theme') ) );
+	// register_nav_menus( array('Megamenu1' => __( 'Navigazione Megamenù 1', 'wp-blank-theme') ) );
+	// register_nav_menus( array('Megamenu2' => __( 'Navigazione Megamenù 2', 'wp-blank-theme') ) );
+	// register_nav_menus( array('Footer1' => __( 'Navigazione Footer 1', 'wp-blank-theme') ) );
+	// register_nav_menus( array('Footer2' => __( 'Navigazione Footer 2', 'wp-blank-theme') ) );
 }
 
 

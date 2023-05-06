@@ -37,7 +37,7 @@ function trp_select_confirmation_validation_filter( $result, $tag ) {
         //se la cilindrata è diversa da 50cc mostro errore di validazione
         if($cilindrata != '50cc'):
 
-            $error_msg = __("Ci dispiace, ma al Miscela Day sono ammessi solo mezzi con cilindrata originale 50cc! Cerca un veicolo con il quale partecipare, ma se non lo trovi non preoccuparti: l'evento è aperto al pubblico, vieni a trovarci con i tuoi amici. Il divertimento è assicurato!!!", 'blank');
+            $error_msg = __("Ci dispiace, ma al Miscela Day sono ammessi solo mezzi con cilindrata originale 50cc! Cerca un veicolo con il quale partecipare, ma se non lo trovi non preoccuparti: l'evento è aperto al pubblico, vieni a trovarci con i tuoi amici. Il divertimento è assicurato!!!", 'wp-blank-theme');
             $result->invalidate($tag, $error_msg);
 
         endif;
@@ -59,7 +59,7 @@ function trp_text_confirmation_validation_filter( $result, $tag ) {
         //se utente già registrato mostro errore di validazione
         if(isset($_COOKIE['miscela_day'])):
 
-            $error_msg = __("Ti sei già prenotato per questo evento!", 'blank');
+            $error_msg = __("Ti sei già prenotato per questo evento!", 'wp-blank-theme');
             $result->invalidate($tag, $error_msg);
 
         endif;
@@ -67,7 +67,7 @@ function trp_text_confirmation_validation_filter( $result, $tag ) {
         //se è stato raggiunto il massimo di prenotazioni mostro errore di validazione
         if($submit_count >= 100):
 
-            $error_msg = __("Ci dispiace, ma sei arrivato tardi, non ci sono più posti disponibili! Ma non disperare: l'evento è a ingresso libero, ti aspettiamo comunque, il divertimento è assicurato!", 'blank');
+            $error_msg = __("Ci dispiace, ma sei arrivato tardi, non ci sono più posti disponibili! Ma non disperare: l'evento è a ingresso libero, ti aspettiamo comunque, il divertimento è assicurato!", 'wp-blank-theme');
             $result->invalidate($tag, $error_msg);
 
         endif;
