@@ -1,4 +1,5 @@
 <?php
+/*TODO SECURITY
 function trp_whitelabel(){
 	remove_action('wp_head', 'rsd_link');
 	remove_action('wp_head', 'wp_generator');
@@ -41,6 +42,8 @@ function trp_whitelabel(){
 	add_action( 'init', 'disable_wp_emojicons' );
 }
 
+trp_whitelabel();
+
 
 function trp_xmlrpc_disable(){
 	// Disable use XML-RPC
@@ -55,53 +58,9 @@ function trp_xmlrpc_disable(){
 	}
 }
 
-
-trp_whitelabel();
 trp_xmlrpc_disable();
+*/
 
-
-//EDIT CAPABILIES FOR ADMINISTRATOR 
-function trp_edit_role_caps() {
-	$current_user = wp_get_current_user();
-
-	if( in_array( $current_user->user_email, array('supporto@trapstudio.it', 'matteo@trapstudio.it', 'simone.manfredini@trapella.it', 'simone.manfredini@trapstudio.it', 'marzia.martinelli@trapstudio.it') ) ):
-	
-		//add custom capabilities for super admin
-		$current_user->add_cap( 'trap_admin', true );
-
-	else:
-
-		//didsabilito editor tema e plugin
-		if(get_field('capabilities_files_disabled', 'option')):
-			define('DISALLOW_FILE_EDIT', TRUE);
-		endif;
-
-		//remove dangerous capability for other admin
-		if(get_field('capabilities_themes_disabled', 'option')):
-			$current_user->add_cap( 'upload_themes', false );
-			$current_user->add_cap( 'install_themes', false );
-			$current_user->add_cap( 'switch_themes', false );
-			$current_user->add_cap( 'edit_themes', false );
-			$current_user->add_cap( 'delete_themes', false );
-		endif;
-
-		if(get_field('capabilities_plugins_disabled', 'option')):
-			$current_user->add_cap( 'upload_plugins', false );
-			$current_user->add_cap( 'install_plugins', false );
-			$current_user->add_cap( 'activate_plugins', false );
-			$current_user->add_cap( 'edit_plugins', false );
-			$current_user->add_cap( 'delete_plugins', false );
-		endif;
-
-		if(get_field('capabilities_updates_disabled', 'option')):
-			$current_user->add_cap( 'update_plugins', false );
-			$current_user->add_cap( 'update_core', false );
-			$current_user->add_cap( 'update_themes', false );
-		endif;
-
-	endif;
-}
-add_action( 'init', 'trp_edit_role_caps', 11 );
 
 /* DEBUG LOG 
 

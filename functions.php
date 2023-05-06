@@ -8,7 +8,6 @@ define('THEME_DIR', dirname(__FILE__) );
 
 require_once(THEME_DIR . '/inc/trapstudio/scripts.php');
 require_once(THEME_DIR . '/inc/trapstudio/api.php');
-require_once(THEME_DIR . '/inc/trapstudio/ajax-api.php');
 require_once(THEME_DIR . '/inc/trapstudio/performance.php');
 require_once(THEME_DIR . '/inc/trapstudio/htaccess.php');
 require_once(THEME_DIR . '/inc/trapstudio/security.php');
@@ -39,12 +38,12 @@ endif;
 //MENU
 add_theme_support( 'nav-menus' );
 if ( function_exists( 'register_nav_menus' ) ) {
-	register_nav_menus( array('Primario' => __( 'Navigazione primaria', 'dna') ) );
-    // register_nav_menus( array('Top' => __( 'Navigazione Top Bar', 'dna') ) );
-	// register_nav_menus( array('Megamenu1' => __( 'Navigazione Megamenù 1', 'dna') ) );
-	// register_nav_menus( array('Megamenu2' => __( 'Navigazione Megamenù 2', 'dna') ) );
-	// register_nav_menus( array('Footer1' => __( 'Navigazione Footer 1', 'dna') ) );
-	// register_nav_menus( array('Footer2' => __( 'Navigazione Footer 2', 'dna') ) );
+	register_nav_menus( array('Primario' => __( 'Navigazione primaria', 'blank') ) );
+    // register_nav_menus( array('Top' => __( 'Navigazione Top Bar', 'blank') ) );
+	// register_nav_menus( array('Megamenu1' => __( 'Navigazione Megamenù 1', 'blank') ) );
+	// register_nav_menus( array('Megamenu2' => __( 'Navigazione Megamenù 2', 'blank') ) );
+	// register_nav_menus( array('Footer1' => __( 'Navigazione Footer 1', 'blank') ) );
+	// register_nav_menus( array('Footer2' => __( 'Navigazione Footer 2', 'blank') ) );
 }
 
 
