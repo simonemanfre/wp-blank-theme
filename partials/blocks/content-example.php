@@ -1,5 +1,0 @@
-<?php
-/**
- * Block Name: Example
- */ 
-?>
