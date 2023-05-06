@@ -1,32 +1,32 @@
 <?php 
-
-//SVG UPLOAD
-function cc_mime_types($mimes) {
-    $mimes['svg'] = 'image/svg+xml';
-    return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
-
-
 //ADMIN STYLE E SCRIPT
-function admin_scripts() {
-    wp_enqueue_style( 'admin', get_template_directory_uri() . '/assets/css/admin.css', array(), null);
+function trp_admin_scripts_and_css() {
+    wp_enqueue_style( 'admin', THEME_URL . '/assets/css/admin.css', array(), null);
+    wp_enqueue_script( 'admin', THEME_URL . "/assets/js/admin.js", array(), '1.0', true);
 }
-add_action( 'admin_enqueue_scripts', 'admin_scripts' );
+add_action( 'admin_enqueue_scripts', 'trp_admin_scripts_and_css' );
 
 
-//LOGIN STYLE E SCRIPT
+//ABILITO SOLO ALCUNI BLOCCHI GUTEBERG
 /*
-
-PER AGGIUNGERE CSS E JS ALLA PAGINA DI LOGIN
-
-function login_scripts() {
-    $dati_tema = wp_get_theme();
-
-    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/assets/css/login.css', $dati_tema->Version );
-    wp_enqueue_script( 'custom-login', get_stylesheet_directory_uri() . '/assets/js/login.js', $dati_tema->Version, true );
+function trp_allowed_block_types() {
+	return array(
+		'acf/custom-block',
+		'core/paragraph',
+		'core/heading',
+		'core/list',
+		'core/quote',
+		'core/image',
+		'core/media-text',
+		'core/freeform',
+		'core/spacer',
+		'core/html',
+		'core/separator',
+		'core/shortcode',
+		'contact-form-7/contact-form-selector',
+	);
 }
-add_action( 'login_enqueue_scripts', 'login_scripts' );
+add_filter( 'allowed_block_types_all', 'trp_allowed_block_types' );
 */
 
 
@@ -36,11 +36,26 @@ if(!current_user_can('edit_posts')){
 }
 
 
-//REDIRECT TO DASHBOARD FOR USER
+//DISABLE EDITOR FULLSCREEN BY DEFAULT
+function ghub_disable_editor_fullscreen_mode() {
+	$script = "window.onload = function() { const isFullscreenMode = wp.data.select( 'core/edit-post' ).isFeatureActive( 'fullscreenMode' ); if ( isFullscreenMode ) { wp.data.dispatch( 'core/edit-post' ).toggleFeature( 'fullscreenMode' ); } }";
+	wp_add_inline_script( 'wp-blocks', $script );
+}
+add_action( 'enqueue_block_editor_assets', 'ghub_disable_editor_fullscreen_mode' );
+
+
+//MOVE YOAST SETTINGS PANEL IN EDITOR TO BOTTOM
+function yoasttobottom() {
+	return 'low';
+}
+add_filter( 'wpseo_metabox_prio', 'yoasttobottom');
+
+
+//REDIRECT DASHBOARD
 function trp_get_dashboard_url() {
     /*
-    Modificare url dashboard 
-    oppure ricordarsi di assegnare il template p-dashboard.php
+    * Modificare url dashboard 
+    * oppure ricordarsi di assegnare il template p-dashboard.php
     */
     $args = array(
         'posts_per_page' => 1,
@@ -53,38 +68,60 @@ function trp_get_dashboard_url() {
     if($admin_page):
         $url = get_the_permalink($admin_page[0]);
     else:
-        $url = get_home_url();
+        $url = HOME_URL;
     endif;
 
     return $url;
 }
 
-//redirect dashboard
-function wp_admin_redirect() {
-    if (!current_user_can( 'edit_posts' ) && !wp_doing_ajax() ) {
+//hide dashboard for users
+function trp_admin_redirect() {
+    $current_user = wp_get_current_user();
+
+    //se l'utente è sottoscrittore e non sto facendo una chiamata ajax
+    if (in_array('subscriber', $current_user->roles) && !wp_doing_ajax() ) {
         $url = trp_get_dashboard_url();
 
         wp_safe_redirect( $url);
         exit;
     }
 }
-add_action( 'admin_init', 'wp_admin_redirect', 1 );
+add_action( 'admin_init', 'trp_admin_redirect', 1 );
 
 //redirect after login
-function login_redirect( $redirect_to, $request, $user ){
-    if($redirect_to):
-        $url = $redirect_to;
-    else:
-        $url = trp_get_dashboard_url();
-    endif;
+function trp_login_redirect( $redirect_to, $request, $user ){
+    $current_user = wp_get_current_user();
 
-    return $url;
+    //se l'utente non è amministratore
+    if(!in_array('administrator', $current_user->roles)):
+
+        //cambiare redirect qui
+        return $redirect_to;
+
+    else:
+
+        return $redirect_to;
+
+    endif;
 }
-add_filter( 'login_redirect', 'login_redirect', 10, 3 );
+add_filter( 'login_redirect', 'trp_login_redirect', 10, 3 );
+
 
 // CUSTOM LOGIN
+
+//logo url + title
+function trp_login_logo_url() {
+    return HOME_URL;
+}
+add_filter( 'login_headerurl', 'trp_login_logo_url' );
+
+function trp_login_logo_url_title() {
+    return get_option('blogname');
+}
+add_filter( 'login_headertext', 'trp_login_logo_url_title' );
+
 //login css inline
-function my_login_inline_css() {
+function trp_login_inline_css() {
     /*
     PRENDERE VALORI CAMPI ACF OPTIONS
     $color1 = get_field('colore_primario', 'option');
@@ -112,48 +149,45 @@ function my_login_inline_css() {
     <?php endif; ?>
 <?php
 }
-add_action('login_head', 'my_login_inline_css');
+add_action('login_head', 'trp_login_inline_css');
 
-//logo url
-function my_login_logo_url() {
-    return home_url();
-}
-add_filter( 'login_headerurl', 'my_login_logo_url' );
+//login style e script
+/*
+function trp_login_scripts_and_css() {
+    $dati_tema = wp_get_theme();
 
-function my_login_logo_url_title() {
-    return get_bloginfo('name');
+    wp_enqueue_style( 'custom-login', get_stylesheet_directory_uri() . '/assets/css/login.css', $dati_tema->Version );
+    wp_enqueue_script( 'custom-login', get_stylesheet_directory_uri() . '/assets/js/login.js', $dati_tema->Version, true );
 }
-add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+add_action( 'login_enqueue_scripts', 'trp_login_scripts_and_css' );
+*/
 
 /*
-
 //login message
-function my_login_message() {
+function trp_login_message() {
     if($_GET['action'] == 'register'):
         return '<h2>Aggiungere messaggio form Registrazione</h2>';
     else:
         return '<h2>Aggiungere messaggio form Login</h2>';
     endif;
 }
-add_filter( 'login_message', 'my_login_message' );
+add_filter( 'login_message', 'trp_login_message' );
 
 //login form
-function my_login_form() {
+function trp_login_form() {
     echo '<p><strong>aggiungere cose extra al form di login qui</strong></p>';
 }
-add_action( 'login_form', 'my_login_form' );
+add_action( 'login_form', 'trp_login_form' );
 
 //register form
-function my_register_form() {
+function trp_register_form() {
     echo '<p><strong>aggiungere cose extra al form di registrazione qui</strong></p>';
 }
-add_action( 'register_form', 'my_register_form' );
+add_action( 'register_form', 'trp_register_form' );
 
 //login footer
-function my_login_footer() {
+function trp_login_footer() {
     echo 'FOOTER';
 }
-add_action( 'login_footer', 'my_login_footer' );
+add_action( 'login_footer', 'trp_login_footer' );
 */
-
-?>

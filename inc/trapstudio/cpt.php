@@ -1,10 +1,8 @@
 <?php 
-
+/*TODO REGISTER CPT
 function cptui_register_my_cpts() {	
 
-	/**
-	 * Post Type: Example.
-    */
+	// Post Type: Example.
 
 	$labels = [
 		"name" => 'Example',
@@ -39,13 +37,13 @@ function cptui_register_my_cpts() {
 }
 
 add_action( 'init', 'cptui_register_my_cpts' );
+*/
 
 
+/*
 function cptui_register_my_taxes() {
 
-	/**
-	 * Taxonomy: Typology.
-	 */
+	// Taxonomy: Typology.
 
 	$labels = [
 		"name" => 'Example Typology',
@@ -73,5 +71,4 @@ function cptui_register_my_taxes() {
 }
 
 add_action( 'init', 'cptui_register_my_taxes' );
-
-?>
+*/
