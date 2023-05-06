@@ -1,9 +1,11 @@
 <?php 
-/* Template Name: Page */
-get_header(); ?>
+/* Template Name: Composer */
+get_header(); 
+?>
 
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
+        <?php get_template_part('partials/flexible', 'composer'); ?>
 
     <?php endwhile; endif; ?>
 
