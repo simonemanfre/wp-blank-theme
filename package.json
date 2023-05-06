@@ -1,6 +1,12 @@
 {
-  "name": "dna",
-  "version": "0.1.0",
-  "dependencies": {
+  "name": "DNA",
+  "version": "1.0.0",
+  "scripts": {
+    "sass": "sass -w assets/scss:assets/css",
+    "sass:prod": "sass --style=compressed --no-source-map assets/scss:assets/css"
+  },
+  "author": "Trapstudio",
+  "devDependencies": {
+    "sass": "^1.58.0"
   }
 }

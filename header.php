@@ -1,33 +1,25 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9" <?php language_attributes(); ?>> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" dir="ltr" <?php language_attributes(); ?>> <!--<![endif]-->
+<html class="no-js" dir="ltr" <?php language_attributes(); ?>>
 <head>
-  	
-    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta charset="<?php echo get_option('blog_charset'); ?>">
     <meta name="theme-color" content="#000000">
     
-    <title><?php wp_title(' - ', true, 'right'); ?> <?php if (!function_exists('wpseo_activate')): bloginfo('name'); endif; ?></title>
+    <title><?php wp_title(' - ', true, 'right'); ?> <?php if (!function_exists('wpseo_activate')): echo get_option('blogname'); endif; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!--[if lt IE 9]>
-      <script src="<?php bloginfo('template_url'); ?>/js/html5shiv.js"></script>
-      <script src="<?php bloginfo('template_url'); ?>/js/respond.min.js"></script>
-    <![endif]-->
     
 	<?php wp_head(); ?>
     
-    <?php if(function_exists('get_field') && get_field('css_custom', 'option')): ?>
+    <?php if(get_field('css_custom', 'option')): ?>
         <style>
             <?php the_field('css_custom', 'option'); ?>
         </style>
     <?php endif; ?>    
     
-    <?php if(function_exists('get_field') && get_field('html_header', 'option')):
+    <?php 
+    if(get_field('html_header', 'option')):
         the_field('html_header', 'option');
-    endif; ?>
+    endif; 
+    ?>
 </head>
 
 <?php 
@@ -41,12 +33,14 @@ get_header(null, $args);
 
     <?php get_template_part('partials/svg', 'icons'); ?>
 
-    <header class="c-site-header">
+    <a class="c-skip-to-content" href="#main-content"><?php _e('Skip to content', 'dna') ?></a>
+
+    <header id="header-content" class="c-site-header">
         <div class="c-site-header__content l-container">
-            <a href="<?php bloginfo('url'); ?>" class="c-logo c-site-header__logo">
+            <a href="<?php echo HOME_URL; ?>" class="c-site-header__logo c-logo">
                 <?php
                 if(get_field('contact_logo', 'option')):
-                    echo wp_get_attachment_image(get_field('contact_logo', 'option'), 'large');
+                    echo wp_get_attachment_image(get_field('contact_logo', 'option'), 'large', false, array('class' => 'nolazy', 'loading' => false, 'fetchpriority' => 'high'));
                 else:
                     get_template_part('partials/svg', 'logo'); 
                 endif;
@@ -62,17 +56,52 @@ get_header(null, $args);
             <nav class="c-site-nav">                          
                 <ul class="c-site-nav__menu">
                     <?php
-                        $args = array(
+                    $args = array(
                         'theme_location' => 'Primario',
                         'depth'    => 1,
                         'items_wrap' => '%3$s',
                         'container' => ''
-                        );
-
-                        wp_nav_menu($args);
+                    );
+                    wp_nav_menu($args);
                     ?>
                 </ul>
+
+                <?php 
+                //MEGAMENÙ
+                /*
+                ?>
+
+                <section id="megamenu-header" class="c-megamenu">
+                    <div class="l-container l-desktop-flex">
+                        <ul class="c-megamenu__menu">
+                            <?php
+                            $args = array(
+                                'theme_location' => 'Megamenu1',
+                                'depth'    => 1,
+                                'items_wrap' => '%3$s',
+                                'container' => ''
+                            );
+                            wp_nav_menu($args);
+                            ?>
+                        </ul>
+
+                        <ul class="c-megamenu__menu">
+                            <?php
+                            $args = array(
+                                'theme_location' => 'Megamenu2',
+                                'depth'    => 1,
+                                'items_wrap' => '%3$s',
+                                'container' => ''
+                            );
+                            wp_nav_menu($args);
+                            ?>
+                        </ul>                           
+                    </div>
+                </section>
+
+                <?php */ ?>
             </nav> 
         </div>
     </header>
-    <main class="l-main">
+
+    <main id="main-content" class="l-main">
