@@ -1,28 +1,77 @@
 /*
-Theme Name: WP Starter Theme
+Theme Name: WP Blank Theme
 Author: Simone Manfredini
 Author URI: http://www.trapstudio.it/
 GitHub Theme URI: https://github.com/simonemanfre/wp-starter-theme
 Version: 1.2.0
-Text Domain: wp-starter-theme
+Text Domain: wp-blank-theme
 */
+/*WORDPRESS*/
 .alignleft {
   display: block;
-  margin-bottom: 10px;
+  max-width: 100%;
+  margin-bottom: 16px;
 }
 .alignright {
   display: block;
-  margin-bottom: 10px;
+  max-width: 100%;
+  margin-bottom: 16px;
 }
 .aligncenter {
   display: block;
+  max-width: 100%;
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 16px;
+}
+.alignnone {
+  max-width: 100%;
+}
+.u-full-width {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 .error404 .c-page-header,
 .error404 .c-content__text {
   text-align: center;
 }
+
+/*SKIP OT CONTENT*/
+.c-skip-to-content {
+  position: fixed;
+  top: 20px;
+  right: 100%;
+  color: #fff;
+  background-color: var(--color-primary, #00b463);
+  font-family: serif;
+  font-family: var(--font-text, serif);
+  text-transform: uppercase;
+  padding: 8px 16px;
+  transition: 0.3s ease;
+  z-index: 999999;
+  white-space: nowrap;
+}
+.c-skip-to-content:focus {
+  transform: translateX(100%);
+}
+
+/*HEADER*/
+.menu-item__arrow {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: block;
+  transform: translateY(-50%);
+}
+.menu-item__arrow svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+
 /*HEADROOM*/
 /*
 .c-site-header {
@@ -30,27 +79,49 @@ Text Domain: wp-starter-theme
   top: 0;
   left: 0;
   right: 0;
+  background-color: #fff;
   z-index: 10;
 }
 .c-site-header.headroom {
-  -webkit-transition: -webkit-transform 200ms linear;
-  transition: -webkit-transform 200ms linear;
   transition: transform 200ms linear;
-  transition: transform 200ms linear, -webkit-transform 200ms linear;
 }
 .c-site-header.headroom--unpinned {
-  -webkit-transform: translateY(-100%);
   transform: translateY(-100%);
 }
 .c-site-header.headroom--pinned:not(.headroom--top) {
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 */
-/*FINE HEADROOM*/
-@media screen and (min-width: 480px) {
+
+/*FORM*/
+input[type="date"] {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  color: #000;
+  background: none;
+  padding-right: 50px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  color: transparent;
+  background-size: 20px;
+  background-position: right 5px center;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
+  /*WORDPRESS*/
   .alignleft {
     margin-right: 10px;
     float: left;
@@ -62,7 +133,9 @@ Text Domain: wp-starter-theme
     clear: right;
   }
 }
+
 @media screen and (min-width: 1024px) {
 }
+
 @media screen and (min-width: 1280px) {
 }
